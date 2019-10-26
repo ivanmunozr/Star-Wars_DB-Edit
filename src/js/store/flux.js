@@ -12,7 +12,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+			categorias: [{ nombre: "Personajes" }, { nombre: "Vehiculos" }, { nombre: "Planetas" }],
+			general: {}
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -20,6 +22,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 			loadSomeData: () => {
+				fetch("https://swapi.co/api/", {
+					metod: "GET"
+				})
+					.then(resp => {
+						console.log(resp.ok); // will be true if the response is successfull
+						console.log(resp.status); // the status code = 200 or code = 400 etc.
+						return resp.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
+					})
+					.then(data => {
+						setStore({ general: data });
+					});
+
 				/**
 					fetch().then().then(data => setStore({ "foo": data.bar }))
 				*/
