@@ -21,7 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
-			loadSomeData: () => {
+			loadData: () => {
 				fetch("https://swapi.co/api/", {
 					metod: "GET"
 				})
@@ -31,7 +31,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return resp.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
 					})
 					.then(data => {
-						setStore({ general: data });
+						console.log(data);
 					});
 
 				/**
